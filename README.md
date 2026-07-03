@@ -2,19 +2,17 @@
 
 The official React SDK for [formbuild.io](https://formbuild.io). 
 
-Easily connect your React frontend to your formbuild backend without writing manual `fetch` boilerplate or managing complex form states.
+This package provides native React hooks to handle form submissions, loading states, and error parsing, replacing the need for manual `fetch` calls.
 
 ## Installation
 
 ```bash
 npm install @formbuild/react
-# or
-yarn add @formbuild/react
-# or
-pnpm add @formbuild/react
 ```
 
-## Quickstart
+## Usage
+
+Pass your Formbuild endpoint ID to the `useFormbuild` hook. It returns a `submit` function and state variables for rendering your UI.
 
 ```tsx
 import { useState } from 'react';
@@ -31,7 +29,7 @@ export default function ContactForm() {
   };
 
   if (isSuccess) {
-    return <p>Thank you for your message!</p>;
+    return <p>Message sent successfully.</p>;
   }
 
   return (
@@ -49,7 +47,7 @@ export default function ContactForm() {
       />
       
       <button type="submit" disabled={isLoading}>
-        {isLoading ? "Submitting..." : "Send Message"}
+        {isLoading ? "Submitting..." : "Send"}
       </button>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
@@ -58,8 +56,17 @@ export default function ContactForm() {
 }
 ```
 
-## Features
-- **Zero Dependencies:** Built entirely with native React hooks and `fetch`.
-- **Automatic State Management:** Handles `isLoading`, `isSuccess`, and `error` states for you.
-- **FormData Support:** Pass a standard JavaScript object *or* a `FormData` object directly to the `submit()` function.
-- **TypeScript Ready:** Fully typed and thoroughly documented.
+## API Reference
+
+### `useFormbuild(formId: string, options?: UseFormbuildOptions)`
+
+**Arguments:**
+- `formId` (string): Your unique endpoint ID from the dashboard.
+- `options` (object, optional): Configuration options.
+  - `endpoint` (string): Override the default API URL (defaults to `https://formbuild.io`).
+
+**Returns:**
+- `submit(data: Record<string, any> | FormData)`: Function to submit the data.
+- `isLoading` (boolean): `true` while the request is pending.
+- `isSuccess` (boolean): `true` if the submission was successful.
+- `error` (string | null): Contains the error message if the submission fails.
