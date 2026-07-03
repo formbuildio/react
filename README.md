@@ -1,6 +1,10 @@
-# @formbuild/react
+<div align="center">
+  <a href="https://formbuild.io">
+    <img src="https://raw.githubusercontent.com/formbuildio/.github/main/assets/banner.svg" alt="formbuild.io" width="100%" />
+  </a>
+</div>
 
-The official React SDK for [formbuild.io](https://formbuild.io). 
+# @formbuild/react 
 
 This package provides native React hooks to handle form submissions, loading states, and error parsing, replacing the need for manual `fetch` calls.
 
